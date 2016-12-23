@@ -27,7 +27,12 @@ Vagrant.configure("2") do |config|
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   # config.vm.network "private_network", ip: "192.168.33.10"
-
+  config.vm.provision :chef_client do |chef|
+  chef.chef_server_url = "https://api.opscode.com/organizations/tutorslink"
+  chef.validation_key_path = "/home/subhranil/Styletag/learn-chef/chef-repo/.chef/tutorslink-validator.pem"
+  chef.validation_client_name = "tutorslink-validator"
+  chef.node_name = "tutorslink_vm"
+  end
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
   # your network.
